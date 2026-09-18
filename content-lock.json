@@ -1,0 +1,30 @@
+{
+  "source_commit": "e03dc1535448de1f7c030ce696aca72ed33714b0",
+  "description": "Git blob hashes of the complete historical Markdown archive before adding the site builder. Preserve these files; add corrections separately.",
+  "files": {
+    "lessons/day-001.md": "3a2d2e733de82a4d4c022b08e5f1f24497240268",
+    "lessons/day-002.md": "589934fc19af203197aee8858f7d9abda0caabd0",
+    "lessons/day-003.md": "80ab7f0ff1d9dca0c00d21fea6804b387026cc49",
+    "lessons/day-004.md": "063cd16554ac74f55cb0bfc7719f2713a95e755e",
+    "lessons/day-005.md": "849387d599baa3dcfe27675d3a18e5e0f49934a0",
+    "lessons/day-006.md": "252a47c976a3c1a28abcd91ddb65eaa4497c67c4",
+    "lessons/day-007.md": "602b2705248b85fb56dd3e844fe91d82b93be442",
+    "lessons/day-008.md": "14ea9b938e891d74abf6e6248977eee7a406528f",
+    "lessons/day-009.md": "93b6b2c57c36d87eb1bb1fd3b37a4a62ce6459fb",
+    "lessons/day-010.md": "9dfab50ba061b65ef3a25b8c2ae1dd773badb796",
+    "lessons/day-011.md": "5ced4c82e679adb3ea8ecccb322762de314cc3bb",
+    "lessons/day-012.md": "3800fb13fe34c398898030ee0c61a8363a6e6ca5",
+    "lessons/day-013.md": "374372d835ea9ee61ebd152ec5cbd45f3d1620c7",
+    "lessons/day-014.md": "6315ff4582a90413a74e209e9d5b4c0307e36c49",
+    "lessons/day-015.md": "6cbd08ad7647e5260109b68e2e23649e6529378a",
+    "lessons/day-016.md": "3a65783644df370668b4952d03c70e0ea25b6019",
+    "lessons/day-017.md": "c3ca37e2e3b25dce049f6718a39f5a085889dc5b",
+    "lessons/day-018.md": "ffed3893b036d7fd72ffbeccd82721c36e6f6d34",
+    "lessons/day-019.md": "cb409171bad0d9e4cb9b2da638b2f04bb09fb35e",
+    "lessons/day-020.md": "1e21927afaa95723654c2c66c93e83de497666de",
+    "lessons/day-021.md": "13eb950289bcf0ae438d41e88f33c88f2f1d8dc6",
+    "archive/live-review.md": "a4fb11e79ce57557bbe6eb7a3d3e84b50eb9c15b",
+    "archive/errata.md": "e6173b77b40a96b2efc2efdcfc4f090734b3dbe0",
+    "archive/setup.md": "ffb67a2a8c23f362bff43e2128724043e3f40817"
+  }
+}
