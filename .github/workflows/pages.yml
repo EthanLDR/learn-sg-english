@@ -73,3 +73,48 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify live website and exact deployed commit
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json, os, time, urllib.request
+          from urllib.parse import urlparse
+          base = os.environ['SITE_URL'].rstrip('/') + '/'
+          expected = os.environ['EXPECTED_SHA']
+          parsed = urlparse(base)
+          assert parsed.scheme == 'https' and parsed.hostname == 'ethanldr.github.io'
+          assert parsed.path == '/learn-sg-english/'
+          error = None
+          for attempt in range(12):
+              try:
+                  suffix = '?verify=' + expected + '-' + str(attempt)
+                  with urllib.request.urlopen(base + 'manifest.json' + suffix, timeout=20) as r:
+                      assert r.status == 200
+                      manifest = json.load(r)
+                  assert manifest['commit'] == expected, 'CDN still serves an earlier commit'
+                  assert manifest['lesson_count'] >= 21
+                  assert manifest['historical_archive_verified'] is True
+                  with urllib.request.urlopen(base + suffix, timeout=20) as r:
+                      assert r.status == 200
+                      page = r.read().decode('utf-8')
+                  anchor = 'day-' + str(manifest['latest_day']).zfill(2)
+                  assert 'id="' + anchor + '"' in page, 'Latest lesson anchor missing'
+                  assert 'id="live-review"' in page and 'id="errata"' in page
+                  print('LIVE HTTP 200:', base)
+                  print('VERIFIED COMMIT:', expected)
+                  print('VERIFIED LESSONS:', manifest['lesson_count'])
+                  print('LATEST ANCHOR:', '#' + anchor)
+                  with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as out:
+                      out.write(f"## Live website verified\n\n[Open Day {manifest['latest_day']}]({base}#{anchor})\n\n")
+                      out.write(f"HTTP 200 for homepage and manifest. Deployed commit `{expected}`; {manifest['lesson_count']} complete lessons.\n")
+                  break
+              except Exception as exc:
+                  error = exc
+                  print('Waiting for Pages propagation:', type(exc).__name__, str(exc))
+                  if attempt < 11:
+                      time.sleep(10)
+          else:
+              raise RuntimeError('Live site verification failed') from error
+          PY
