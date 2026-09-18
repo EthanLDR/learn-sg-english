@@ -1,7 +1,17 @@
 name: Build and deploy English lessons
 
-# Manual until the complete archive is committed; push publishing is enabled last.
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'lessons/**'
+      - 'archive/**'
+      - 'scripts/**'
+      - 'site/**'
+      - 'site-config.json'
+      - 'content-lock.json'
+      - 'requirements.txt'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -15,17 +25,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: read
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install build dependencies
         run: python -m pip install -r requirements.txt
+      - name: Check JavaScript syntax
+        run: node --check site/app.js
       - name: Build and validate complete archive
         run: python scripts/build.py
+      - name: Summarize validated archive
+        run: |
+          python - <<'PY'
+          import json, os
+          m = json.load(open('_site/manifest.json'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as out:
+              out.write(f"## Complete English archive\n\n{m['lesson_count']} lessons; latest Day {m['latest_day']}.\n\n")
+              out.write(f"{m['practice_message_count']} practice messages; {m['historical_files_verified']} historical files verified.\n\n")
+              out.write(f"Source commit: `{m['commit']}`\n")
+          PY
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
