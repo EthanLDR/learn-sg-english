@@ -1,8 +1,16 @@
 # Singapore English · Ethan
 
-[Open the learning website](https://ethanldr.github.io/learn-sg-english/) · [Latest initialized lesson: Day 21](https://ethanldr.github.io/learn-sg-english/#day-21) · [Build and deployment runs](https://github.com/EthanLDR/learn-sg-english/actions)
+[Open the learning website](https://ethanldr.github.io/learn-sg-english/) · [Latest lesson: Day 34](https://ethanldr.github.io/learn-sg-english/#day-34) · [Build and deployment runs](https://github.com/EthanLDR/learn-sg-english/actions)
 
 A complete, searchable archive of daily 40-minute English-speaking lessons for work and everyday life in Singapore. English practice with concise Chinese explanations.
+
+## Update resumption — 2026-10-06 (Asia/Singapore)
+
+Day 34 is a newly authored 40-minute resumption lesson, dated October 6 in Singapore. It continues after Day 33 (September 30). No original lessons for October 1–5 were recovered during this repair; Day 34 is explicitly labelled as new content, not a historical backfill. Existing lessons and appendices are unchanged.
+
+The daily task and the website deployment are separate steps. A task being enabled does not establish that it can commit to this repository. Each run must check the current Singapore date in the lesson sources, reuse an existing lesson for that date, and only add the next consecutive day when no lesson for that date exists. The build rejects duplicate dates; it does not generate lessons or repair a task's write permissions. In particular, a later October 6 run should reuse Day 34 rather than create a second October 6 lesson.
+
+Publication is verified per commit using the Actions run and the public `manifest.json`. This source update alone does not establish that a future scheduled run has completed. Use the daily cloud procedure below and report generation, commit, build and live deployment separately.
 
 ## Verified deployment — 2026-09-18
 
